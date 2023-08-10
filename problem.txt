@@ -1,0 +1,14 @@
+#############################################################
+
+problem:
+    i cant find redis.conf file 
+
+how i solved:
+
+    i login to pod and execute these command :
+
+        redis-cli
+        AUTH your_password
+        config get dir
+
+################################################################
