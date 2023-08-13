@@ -1,0 +1,31 @@
+step 1 :
+
+    you must change masterauth and requirepass in redis-configmap.yaml and
+    then apply this manifest
+
+step 2 :
+
+    you must apply redis-statefulset.yaml 
+
+step 3 :
+
+    you must apply redis-servicce.yaml
+
+
+# then you must check that replication is ok 
+
+step 4 : 
+    use these command in master node :
+        kubectl -n redis exec -it redis-0 -- sh
+        redis-cli
+        auth a-very-complex-password-here
+        info replication
+
+    you must see in output : 
+        role: master
+        connection_slave:2
+
+step 5 :
+    you must change youre code that use redis-0.redis.namespace.svc.cluster.local for write
+    and use redis-clusterip service for read  (you must apply redis-clusterip-servicce.yaml)
+
